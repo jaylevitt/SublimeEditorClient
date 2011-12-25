@@ -1,4 +1,4 @@
-This lets you use QuickCursor with Sublime Text 2.
+This lets you use [QuickCursor](http://www.hogbaysoftware.com/products/quickcursor) with [Sublime Text 2](http://www.sublimetext.com/dev).
 
 # Installation
 
