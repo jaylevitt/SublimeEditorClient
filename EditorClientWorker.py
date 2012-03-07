@@ -35,11 +35,11 @@ class EditorClientWorker(NSThread):
     def main(self):
         pool = NSAutoreleasePool.alloc().init()
         NSLog("editing thread started for %s" % self.path)
-        NSLog("shell command: %@", EDITOR_COMMAND % {'linenum': self.linenum, 'filename': self.path})
+        NSLog("shell command: %@", EDITOR_COMMAND % {'linenum': self.linenum, 'filename': self.path.replace("'","'\"'\"'")})
 
         stdin = open('/dev/null','r')
         stdout = open('/dev/null','w')
-        subprocess.call(EDITOR_COMMAND % {'linenum': self.linenum, 'filename': self.path},
+        subprocess.call(EDITOR_COMMAND % {'linenum': self.linenum, 'filename': self.path.replace("'","'\"'\"'")},
                         shell=True, stdin=stdin, stdout=stdout, stderr=stdout)
         #os.system(EDITOR_COMMAND % {'linenum':self.linenum, 'filename':self.path})
 
@@ -53,7 +53,7 @@ class EditorClientWorker(NSThread):
             if self.odb_token:
                 event.AEPutParamDesc(keySenderToken, pack(self.odb_token, typeWildcard))
 
-            fsr = Carbon.File.FSPathMakeRef(self.path)[0]
+            fsr = Carbon.File.FSPathMakeRef(self.path)[0].encode('utf-8')
             event.AEPutParamDesc(AppleEvents.keyDirectObject, pack(fsr))
 
             event.AESend(AppleEvents.kAENoReply, AppleEvents.kAENormalPriority, AppleEvents.kAEDefaultTimeout)
