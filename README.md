@@ -11,6 +11,4 @@ The icon is by [Nate Beaty](http://www.sublimetext.com/forum/viewtopic.php?f=2&t
 
 # Known bugs
 
-* SublimeEditorClient will crash if given a Unicode character in the filename - for instance, if you are on a web page with a bullet in the title. Patches welcome; I don't know Objective C or Cocoa.
-
 * Doesn't support the ODB ability to start at a specific line number. QuickCursor doesn't use this functionality, but other ODB applications might expect it.
